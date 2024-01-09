@@ -1,8 +1,10 @@
 package au.com.telstra.simcardactivator;
 
+import au.com.telstra.simcardactivator.dao.SimDdRecord;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
+@JsonIgnoreProperties(ignoreUnknown = true)
 @SpringBootApplication
 public class SimCardActivator {
 
@@ -28,6 +30,11 @@ public class SimCardActivator {
 
     }
 
+    public SimCardActivator( SimDdRecord simDBRecord) {
+        this.iccid = simDBRecord.getIccid();
+        this.customerEmail = simDBRecord.getCustomerEmail();
+        this.Active = simDBRecord.getActive();
+    }
 
     //getters:
     public String getIccid(){
@@ -57,13 +64,14 @@ public class SimCardActivator {
     }
 
     //toString:
+
+
     @Override
     public String toString() {
-        return "SimActivationRequest{" +
+        return "SimCardActivator{" +
                 "iccid='" + iccid + '\'' +
                 ", customerEmail='" + customerEmail + '\'' +
                 ", Active=" + Active +
                 '}';
     }
-
 }
